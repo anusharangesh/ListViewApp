@@ -33,15 +33,13 @@ public class MainActivity extends ActionBarActivity {
 
         public void run() {
             try {
-
                 if (swipeRefreshLayout.isRefreshing()) {
-                    // re run the verification after 1 second
+                    // Re-run the verification after 1 second
                     handler.postDelayed(this, 1000);
                 } else {
-                    // stop the animation after the data is fully loaded
+                    // Stop the animation after the data is fully loaded
                     swipeRefreshLayout.setRefreshing(false);
                     fetchData();
-
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -79,28 +77,21 @@ public class MainActivity extends ActionBarActivity {
 
     public class LongOperation extends AsyncTask<String, Void, String> {
 
-
         @Override
         protected String doInBackground(String... params) {
 
             HttpClient httpClient = new DefaultHttpClient();
 
-
             HttpGet httpGet;
             String projectResult = "";
             try {
-
-
                 URL url = new URL(params[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setFollowRedirects(true);
                 httpGet = new HttpGet(String.valueOf(url));
                 connection.setInstanceFollowRedirects(true);
 
-
                 try {
-
-
                     HttpResponse httpResponse = httpClient.execute(httpGet);
 
                     BufferedReader bufferedReader = new BufferedReader(
@@ -116,21 +107,17 @@ public class MainActivity extends ActionBarActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             return projectResult;
-
         }
 
         @Override
         protected void onPostExecute(String s) {
 
             super.onPostExecute(s);
-
 
             try {
 
@@ -149,14 +136,10 @@ public class MainActivity extends ActionBarActivity {
                 listView.setAdapter(adapter);
                 getSupportActionBar().setTitle(actionTitle);
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
-
     }
-
 
 }

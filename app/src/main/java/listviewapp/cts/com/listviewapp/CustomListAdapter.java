@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 public class CustomListAdapter extends BaseAdapter {
 
-
     private static LayoutInflater inflater = null;
     private Context context;
     private ArrayList<String> title = new ArrayList<String>();
@@ -28,7 +27,6 @@ public class CustomListAdapter extends BaseAdapter {
     private ArrayList<String> img = new ArrayList<String>();
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
-
 
     public CustomListAdapter(Context context, ArrayList<String> title, ArrayList<String> desc, ArrayList<String> img) {
         super();
@@ -49,13 +47,10 @@ public class CustomListAdapter extends BaseAdapter {
                 return mCache.get(url);
             }
         });
-
     }
-
 
     @Override
     public int getCount() {
-
         return title.size();
     }
 
@@ -73,6 +68,7 @@ public class CustomListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
+
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(R.layout.list_item, null);
@@ -84,21 +80,19 @@ public class CustomListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         viewHolder.title.setText(title.get(position));
         viewHolder.description.setText(desc.get(position));
+
         try {
             if (img.get(position) != null) {
 
                 viewHolder.image.setImageUrl(img.get(position), mImageLoader);
                 viewHolder.image.setDefaultImageResId(R.drawable.ic_launcher);
             }
-
-
         } catch (Exception e) {
-            Log.i("error is", "e");
-
+            Log.i("Error : ", "Image Not Found");
         }
-
 
         return convertView;
     }
@@ -108,6 +102,5 @@ public class CustomListAdapter extends BaseAdapter {
         private NetworkImageView image;
 
     }
-
 
 }
